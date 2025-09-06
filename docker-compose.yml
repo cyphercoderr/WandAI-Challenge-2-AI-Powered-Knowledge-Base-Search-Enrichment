@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  kb:
+    build: .
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8001:8000"
+    restart: unless-stopped
