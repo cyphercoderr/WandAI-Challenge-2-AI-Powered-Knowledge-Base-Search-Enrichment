@@ -129,3 +129,6 @@ curl -X POST http://localhost:8001/completeness \
   -H "Content-Type: application/json" \
   -d '{"question": "What is Kubernetes?", "top_k": 2, "threshold": 0.2}'
 ```
+
+## Author
+Challenge completed by Ahmad.
