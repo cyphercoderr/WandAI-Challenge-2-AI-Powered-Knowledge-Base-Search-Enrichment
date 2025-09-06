@@ -48,3 +48,7 @@ async def completeness(req: CompletenessRequest):
 @app.get("/health")
 async def health():
     return {"ok": True}
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to WandAI Challenge 2 KB API — see /docs for interactive docs"}

@@ -107,13 +107,19 @@ def test_ingest_and_search_and_qa():
     r3 = client.post("/qa", json={"question": "Who founded OpenAI?", "top_k": 3})
     assert "OpenAI" in r3.json()["answer"]
 ```
-## Design Decisions & Trade-offs
+## Design Decisions
+* SimpleVectorStore manages documents, chunks, and embeddings.
+* OpenAI embeddings used when API key is set; fallback to TF-IDF otherwise.
+* Chunking strategy: split by paragraphs, then fixed windows if needed.
+* QA = combine top-k retrieved chunks (up to 2000 chars).
+* Completeness = compute average similarity vs threshold.
 
-* Fallback embeddings: OpenAI for high-quality vectors, TF-IDF for local/dev mode.
-* Naive QA: concatenation of top chunks (kept simple for prototype).
-* Completeness metric: average similarity vs threshold; can be improved with better scoring.
-* Persistence: JSON + .npy for simplicity; swap with DB (Postgres/Redis) in prod.
-* Scalability: Single-process, suitable for prototype; production can use FAISS + workers.
+## Trade-offs (24h Constraint)
+* In-memory + JSON persistence → chosen for speed, would be DB-backed in production.
+* Naive QA concatenation → simple but not context-aware; could be replaced by LLM summarization.
+* TF-IDF fallback → good for prototyping, less semantic than transformer embeddings.
+* Single-process FastAPI app → fine for prototype; production would use FAISS + workers.
+
 
 ## Demo Script (≤5 min)
 
