@@ -1,4 +1,4 @@
-# Wand AI Backend Engineer – Challenge 2: Knowledge Base Prototype
+# Wand AI – Challenge 2: Knowledge Base Prototype
 
 A minimal prototype of a **knowledge base backend** built with  
 **Python + FastAPI + scikit-learn TF-IDF (with optional OpenAI embeddings)**.  
